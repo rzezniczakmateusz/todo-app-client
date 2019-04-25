@@ -13,7 +13,7 @@
         <div id="container">
                 <button id="log_out_b" onclick="">Log out</button>
             <aside>
-                <div class="logo_s">
+                <div class="logo">
                     <img src="./img/logo.png" alt="ToDoApp">
                 </div>
                 <div class="aside_head">
@@ -24,15 +24,18 @@
                     <button id="work_b" onclick="">Work</button><br><br>
                     <button id="home_b" onclick="">Home</button><br><br>
                     <button id="personal_b" onclick="">Personal</button><br><br>
-                <!-- <button id="add_b" onclick="">+</button><br><br>-->
+                    <button id="add_b" onclick="">+</button><br><br>
                 </div>
             </aside>  
             <header>
                 <a>Your task for today:</a>
             </header>    
             <section>
-                <div class="task"><a>jajka, mleko, parówki</a>
-                </div>
+                <ul>
+                    <li>
+                        <a><span> jajka, mleko, czekolada</span></a><button><img class="do" src="./img/do.png"></button><button><img src="./img/bin.png"></button>
+                    </li>
+                </ul>
             </section>
         </div>    
         <script src="./dist/main.bundle.js" async defer></script>
