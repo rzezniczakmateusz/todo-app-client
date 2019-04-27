@@ -13,202 +13,15 @@ body {
 
 #container {
     display: grid;
-    grid-template-columns: [line1] 25vw [line2] 20vw [line3] 30vw [line4] 25vw [line5];
-    grid-template-rows: [line1] auto [line2] auto [line3] auto [line4];
+    grid-template-columns: [line1] 30vw [line2] 20vw [line3] 30vw [line4] 20vw [line5];
+    grid-template-rows: [line1] 20.5vh [line2] 8vh [line3] auto [line4] auto [line5];
     justify-content: center;
 }
-
-.logo {
-    grid-column-start: line2;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-}
-
-#sing_up_b {
-    grid-column-start: line4;
-    grid-column-end: line5;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-    padding: 10px;
-    height: auto;
-    width: 26vmin;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
-    background: rgba(88, 209, 59, 0.9);
-    border-radius: 0.8rem;
-    border: none;
-    color:white;    
-    justify-items: center;
-    align-self: center;
-}
-
-#sing_up_b:hover {
-    background: rgba(88, 209, 59, 0.7)
-}
-
-.log_in a {
-    font-size: 10vh;
-}
-
-.log_in{
-    grid-column-start: line3;
-    grid-column-end: line4;
-    grid-row-start: line2; 
-    grid-row-end: line3;
-    justify-self: center;
-    align-self: center;   
-    text-align: center;
-}
-
-input {
-    height: 7vh;
-    width: 26vw;
-    font-size: 3vh;
-    font-family: 'Montserrat', sans-serif; 
-    border: solid 2px rgba(0, 153, 255, 0.9);
-    border-radius: 0.6rem;
-}
-
-#icon_1 {
-    background: white url(../../public/img/envelope.png) left no-repeat;
-    padding-left: 35px;
-}
-
-#icon_2 {
-    background: white url(../../public/img/key.png) left no-repeat;
-    padding-left: 35px;
-}
-
-#log_in_b {
-    grid-column-start: line4;
-    grid-column-end: line5;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-    padding: 10px;
-    height: auto;
-    width: 29vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
-    background: rgba(0, 153, 255, 0.9);
-    border-radius: 0.8rem;
-    border: none;
-    color:white;    
-    justify-items: center;
-    align-self: center;
-}
-
-#log_in_b:hover {
-    background: rgba(0, 153, 255, 0.7);
-}
-
-/* index1 */
-
-.seeyou {
-    grid-column-start: line3;
-    /*grid-column-end: line5;*/
-    grid-row-start: line2; 
-    grid-row-end: line3;
-    /*justify-self: center;*/
-    align-self: flex-end;   
-    text-align: center;
-}
-
-.seeyou a {
-    font-size: 10vh;
-}
-
-#log_in_again_b {
-    grid-column-start: line4;
-    grid-column-end: line5;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-    padding: 10px;
-    height: auto;
-    width: 29vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
-    background: rgba(0, 153, 255, 0.9);
-    border-radius: 0.8rem;
-    border: none;
-    color:white;    
-    justify-items: center;
-    align-self: center;
-}
-
-#log_in_again_b:hover {
-    background: rgba(0, 153, 255, 0.7);
-}
-
-/* index2 */
-
-#icon_n {
-    background: white url(../../public/img/name.png) left no-repeat;
-    padding-left: 35px;
-}
-
-#lets_notes_b {
-    grid-column-start: line4;
-    grid-column-end: line5;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-    padding: 10px;
-    height: auto;
-    width: 29vw;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
-    background: rgba(0, 153, 255, 0.9);
-    border-radius: 0.8rem;
-    border: none;
-    color:white;    
-    justify-items: center;
-}
-
-#lets_notes_b:hover {
-    background: rgba(0, 153, 255, 0.7);
-}
-
-#log_in_b2 {
-    grid-column-start: line4;
-    grid-column-end: line5;
-    grid-row-start: line1; 
-    grid-row-end: line2;
-    padding: 10px;
-    height: auto;
-    width: 26vmin;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 4vh;
-    background: rgba(88, 209, 59, 0.9);
-    border-radius: 0.8rem;
-    border: none;
-    color:white;    
-    justify-items: center;
-    align-self: center;
-}
-
-#log_in_b2:hover {
-    background: rgba(88, 209, 59, 0.7);
-}
-
-.sing_up a {
-    font-size: 10vh;
-}
-
-.sing_up {
-    grid-column-start: line3;
-    grid-column-end: line4;
-    grid-row-start: line2; 
-    grid-row-end: line3;
-    justify-self: center;
-    align-self: center;   
-    text-align: center;
-}
-
-/* index_main */
 
 #log_out_b {
     grid-column-start: line4;
     grid-column-end: line5;
-    grid-row-start: line1; 
+    grid-row-start: line1;
     grid-row-end: line2;
     padding: 10px;
     height: auto;
@@ -227,29 +40,36 @@ input {
     background: rgba(129, 136, 127, 0.7);
 }
 
-.logo_s {
-    grid-column-start: line1;
-    grid-column-end: line2;
-    grid-row-start: line1; 
+.logo {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1;
     grid-row-end: line2;
+    width: 90%;
+}
+
+.logo > img {
+    width: 90%;
+    display: block;
 }
 
 aside {
     grid-column-start: line1;
     grid-column-end: line2;
     grid-row-start: line1; 
-    grid-row-end: line4;
+    grid-row-end: line5;
     background: rgba(255, 255, 255, 0.9);
-    width: 30vw;
+    width: 28vw;
     height: 100vh;
-}
-
-.aside_head {
+    position: relative;
     padding-left: 2vw;
 }
 
-.three_buttons {
-    padding-left: 2vw;
+.task_buttons {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 4vh;   
 }
 
 #work_b{
@@ -274,7 +94,7 @@ aside {
     width: 26vw;
     font-family: 'Montserrat', sans-serif;
     font-size: 4vh;
-    background: rgba(82, 255, 59, 0.9);
+    background: rgba(82, 255, 59, 0.8);
     border-radius: 0.8rem;
     border: none;
     color:white;    
@@ -300,7 +120,23 @@ aside {
     background: rgba(255, 203, 59, 0.7);
 }
 
-#add_b{
+#all_tasks_b{
+    padding: 10px;
+    height: auto;
+    width: 26vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(100, 15, 15, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;
+}
+
+#all_tasks_b:hover {
+    background: rgba(100, 15, 15, 0.7);
+}
+
+.add_b{
     height: 60px;
     width: 60px;
     font-family: 'Montserrat', sans-serif;
@@ -311,7 +147,7 @@ aside {
     color:white;
 }
 
-#add_b:hover {
+.add_b:hover {
     background: rgba(255, 59, 85, 0.7);
 }
 
@@ -319,16 +155,95 @@ header {
     grid-column-start: line3;
     grid-column-end: line4;
     grid-row-start: line2; 
-    grid-row-end: line3; 
+    grid-row-end: line3;
+  
 }
 
 section {
-    grid-column-start: line3;
-    grid-column-end: line4;
-    grid-row-start: line3;
-    grid-row-end: line4;    
+    display: flex;
+    grid-column-start: line2;
+    grid-column-end: line5;
+    grid-row-start: line3; 
+    grid-row-end: line4;
+    flex-wrap: wrap;
 }
 
-.task {
-    background-color :white;
+section ul {
+    list-style: none;
+}
+
+section li {
+    display: grid;
+    grid-template-columns: 1fr 60px 60px;
+    height: auto;
+    width: 50vw;
+    padding: 2vh;
+    margin: 2vh;
+    border: none;
+    color: white;
+    background: rgba(82, 255, 59, 0.8);
+    border-radius: 0.8rem;
+}
+
+section li a {
+    justify-self: center;
+    align-self: center;
+}
+
+section button {
+   background: transparent;
+   border: none;
+}
+
+.add_form {
+    display: none;
+    flex-wrap: wrap;
+    width: 40vw;
+    height: 45vh;
+    background: white;
+    border: solid 1vh rgba(255, 59, 85, 0.9);
+    border-radius: 0.8rem;
+    position: absolute;
+    transform: translateX(40vw) translateY(30vh);
+    justify-content: center;
+}
+
+.add_form p {
+    padding-left: 5vw;
+    padding-right: 5vw;
+}
+
+.add_select {
+    width: 15vw;
+    height: 6vh;
+    margin-bottom: 1vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    border-radius: 0.8rem;
+    border: solid 1px rgba(255, 59, 85, 0.9);
+    font-family: 'Montserrat', sans-serif;
+}
+
+
+.add_input {
+    width: 30vw;
+    height: 5vh; 
+    border-radius: 0.8rem;
+    border: solid 1px rgba(255, 59, 85, 0.9);
+    margin: 1vh;
+    padding: 1vh;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.form_button {
+    width: 10vw;
+    height: 7vh;
+    background: rgba(255, 59, 85, 0.9);
+    color: white;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    border: none;
+    border-radius: 0.8rem;
+    margin: 1vh;
+    margin-bottom: 2vh;
 }

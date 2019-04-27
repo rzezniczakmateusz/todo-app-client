@@ -1,0 +1,204 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    background: center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    background-image: url("../../public/img/todo_bg.jpg");
+}
+
+#container {
+    display: grid;
+    grid-template-columns: [line1] 25vw [line2] 20vw [line3] 30vw [line4] 25vw [line5];
+    grid-template-rows: [line1] auto [line2] auto [line3] auto [line4];
+    justify-content: center;
+}
+
+.logo {
+    grid-column-start: line2;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+}
+
+#sing_up_b {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+    padding: 10px;
+    height: auto;
+    width: 26vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(88, 209, 59, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#sing_up_b:hover {
+    background: rgba(88, 209, 59, 0.7)
+}
+
+.log_in a {
+    font-size: 10vh;
+}
+
+.log_in{
+    grid-column-start: line3;
+    grid-column-end: line4;
+    grid-row-start: line2; 
+    grid-row-end: line3;
+    justify-self: center;
+    align-self: center;   
+    text-align: center;
+}
+
+input {
+    height: 7vh;
+    width: 26vw;
+    font-size: 3vh;
+    font-family: 'Montserrat', sans-serif; 
+    border: solid 2px rgba(0, 153, 255, 0.9);
+    border-radius: 0.6rem;
+}
+
+#icon_1 {
+    background: white url(../../public/img/envelope.png) left no-repeat;
+    padding-left: 35px;
+}
+
+#icon_2 {
+    background: white url(../../public/img/key.png) left no-repeat;
+    padding-left: 35px;
+}
+
+#log_in_b {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+    padding: 10px;
+    height: auto;
+    width: 29vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(0, 153, 255, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#log_in_b:hover {
+    background: rgba(0, 153, 255, 0.7);
+}
+
+/* index1 */
+
+.seeyou {
+    grid-column-start: line3;
+    /*grid-column-end: line5;*/
+    grid-row-start: line2; 
+    grid-row-end: line3;
+    /*justify-self: center;*/
+    align-self: flex-end;   
+    text-align: center;
+}
+
+.seeyou a {
+    font-size: 10vh;
+}
+
+#log_in_again_b {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+    padding: 10px;
+    height: auto;
+    width: 29vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(0, 153, 255, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#log_in_again_b:hover {
+    background: rgba(0, 153, 255, 0.7);
+}
+
+/* index2 */
+
+#icon_n {
+    background: white url(../../public/img/name.png) left no-repeat;
+    padding-left: 35px;
+}
+
+#lets_notes_b {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+    padding: 10px;
+    height: auto;
+    width: 29vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(0, 153, 255, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+}
+
+#lets_notes_b:hover {
+    background: rgba(0, 153, 255, 0.7);
+}
+
+#log_in_b2 {
+    grid-column-start: line4;
+    grid-column-end: line5;
+    grid-row-start: line1; 
+    grid-row-end: line2;
+    padding: 10px;
+    height: auto;
+    width: 26vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    background: rgba(88, 209, 59, 0.9);
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#log_in_b2:hover {
+    background: rgba(88, 209, 59, 0.7);
+}
+
+.sing_up a {
+    font-size: 10vh;
+}
+
+.sing_up {
+    grid-column-start: line3;
+    grid-column-end: line4;
+    grid-row-start: line2; 
+    grid-row-end: line3;
+    justify-self: center;
+    align-self: center;   
+    text-align: center;
+}
