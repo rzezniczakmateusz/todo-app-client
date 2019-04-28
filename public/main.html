@@ -9,7 +9,7 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link rel="shortcut icon" href="./img/favicon.png" type="image/x=icon"/>
     </head>
-    <body>
+    <body onload="addTodoStatusChangeListener()">
         <div id="container" class="mainSite">
                 <button id="log_out_b" onclick="">Log out</button>
             <aside>
@@ -35,7 +35,7 @@
                 <ul class='tasksList'>
                     <li>
                         <a><span> jajka, mleko, czekolada</span></a>
-                        <button><img class="do" src="./img/do.png"></button>
+                        <button><img class="do" id="done_button1" src="./img/do.png"></button>
                         <button class="bin_b"><img src="./img/bin.png"></button>
                     </li>
                 </ul>
