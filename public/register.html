@@ -10,19 +10,20 @@
         <link rel="shortcut icon" href="./img/favicon.png" type="image/x=icon"/>
     </head>
     <body>
-        <div id="container">    
+        <div id="container">
             <div class="logo">
                 <img src="./img/logo.png" alt="ToDoApp">
             </div>
-            <button id="log_in_b2" onclick="">Log in</button>
-            <form class="sing_up">
+            <a href="index.html" class="log_in_b2"><button id="log_in_b2" onclick="">Log in</button></a>
+            <form class="sing_up" method="POST" action="http://localhost:3000/">
                 <a><b>Sing up</b></a><br><br>
                 <input type="text" placeholder="name" id="icon_n"><br><br>
                 <input type="text" placeholder="email" id="icon_1"><br><br>
                 <input type="text" placeholder="password" id="icon_2"><br><br>
                 <input type="text" placeholder="confirm password" id="icon_2"><br><br>
-                <button id="lets_notes_b" onclick="">Let's notes</button>
+                <a href="main.html" class="lets_notes_b"><button type="submit" id="lets_notes_b">Let's notes</button></a>
             </form>
         <script src="./dist/main.bundle.js" async defer></script>
     </body>
 </html>
+

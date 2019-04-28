@@ -24,14 +24,26 @@ body {
     grid-row-end: line2;
 }
 
-#sing_up_b {
+.sing_up_b {
     grid-column-start: line4;
     grid-column-end: line5;
     grid-row-start: line1; 
     grid-row-end: line2;
-    padding: 10px;
     height: auto;
-    width: 26vmin;
+    width: 26vmin;   
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#sing_up_b {
+    padding: 10px;
+    height: 100%;
+    width: 100%;
     font-family: 'Montserrat', sans-serif;
     font-size: 4vh;
     background: rgba(88, 209, 59, 0.9);
@@ -40,6 +52,7 @@ body {
     color:white;    
     justify-items: center;
     align-self: center;
+    cursor: pointer;
 }
 
 #sing_up_b:hover {
@@ -79,11 +92,21 @@ input {
     padding-left: 35px;
 }
 
-#log_in_b {
+.log_in_b {
     grid-column-start: line4;
     grid-column-end: line5;
     grid-row-start: line1; 
     grid-row-end: line2;
+    height: auto;
+    width: 29vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+}
+
+#log_in_b {
     padding: 10px;
     height: auto;
     width: 29vw;
@@ -95,6 +118,7 @@ input {
     color:white;    
     justify-items: center;
     align-self: center;
+    cursor: pointer;
 }
 
 #log_in_b:hover {
@@ -117,11 +141,23 @@ input {
     font-size: 10vh;
 }
 
-#log_in_again_b {
+.log_in_again_b {
     grid-column-start: line4;
     grid-column-end: line5;
     grid-row-start: line1; 
     grid-row-end: line2;
+    height: auto;
+    width: 29vw;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#log_in_again_b {
     padding: 10px;
     height: auto;
     width: 29vw;
@@ -133,6 +169,7 @@ input {
     color:white;    
     justify-items: center;
     align-self: center;
+    cursor: pointer;
 }
 
 #log_in_again_b:hover {
@@ -167,11 +204,23 @@ input {
     background: rgba(0, 153, 255, 0.7);
 }
 
-#log_in_b2 {
+.log_in_b2 {
     grid-column-start: line4;
     grid-column-end: line5;
     grid-row-start: line1; 
     grid-row-end: line2;
+    height: auto;
+    width: 26vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+#log_in_b2 {
     padding: 10px;
     height: auto;
     width: 26vmin;
@@ -183,6 +232,7 @@ input {
     color:white;    
     justify-items: center;
     align-self: center;
+    cursor: pointer;
 }
 
 #log_in_b2:hover {

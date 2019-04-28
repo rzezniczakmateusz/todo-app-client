@@ -18,11 +18,24 @@ body {
     justify-content: center;
 }
 
-#log_out_b {
+.log_out_b {
     grid-column-start: line4;
     grid-column-end: line5;
     grid-row-start: line1;
     grid-row-end: line2;
+    height: auto;
+    width: 26vmin;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 4vh;
+    border-radius: 0.8rem;
+    border: none;
+    color:white;    
+    justify-items: center;
+    align-self: center;
+}
+
+
+#log_out_b {
     padding: 10px;
     height: auto;
     width: 26vmin;
@@ -34,6 +47,7 @@ body {
     color:white;    
     justify-items: center;
     align-self: center;
+    cursor: pointer;
 }
 
 #log_out_b:hover {
