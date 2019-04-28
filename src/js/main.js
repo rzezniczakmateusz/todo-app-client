@@ -13,7 +13,6 @@ window.addEventListener('load', function () {
 })
 
 
-<<<<<<< Updated upstream
 function addTodoStatusChangeListener() {
     const checkButton = document.getElementById('done_button1');
     let checkButtonState = 'undone';
@@ -41,26 +40,9 @@ function addTodoStatusChangeListener() {
             .then(resp => {
                 console.log(resp);
             });
-=======
-// const checkButton = document.getElementsByClassName(`do`)[0];
-// let checkButtonState = 'undone';
-
-function imageChange() {
-    if (checkButtonState === 'undone') {
-        checkButton.src = '../public/img/done.png';
-        checkButtonState = 'done';
-    } else {
-        checkButton.src = '../public/img/do.png';
-        checkButtonState = 'undone'
->>>>>>> Stashed changes
+        }
+        checkButton.addEventListener('click', () => imageChange(taskId));
     }
-
-<<<<<<< Updated upstream
-    checkButton.addEventListener('click', () => imageChange(taskId));
-}
-=======
-// checkButton.addEventListener('click', imageChange);
->>>>>>> Stashed changes
 
 
 // const button = document.querySelector('.add_b');
@@ -150,7 +132,7 @@ axios({
 
 
 
-async function setCategory (cat) {
+function setCategory (cat) {
   
 axios({
     method:'get',
@@ -250,7 +232,7 @@ function register(e) {
     };
     console.log(otherParam);
     axios.post("http://localhost:3000/api/register", registrationBody)
-    ,then(res => {
+    .then(res => {
         console.log("Registration successful!")
     })
     .catch(error => {
