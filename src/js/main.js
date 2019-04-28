@@ -215,7 +215,7 @@ function register() {
     };
 
 
-    fetch("/api/register", otherParam)
+    fetch("/api/http;//localhost:3000/api/register", otherParam)
         .then(res => {
             console.log("Registration successful!")
         }).catch(error => {
@@ -240,7 +240,7 @@ function login() {
         method: "POST",
     }
 
-    fetch("/api/login", otherParam)
+    fetch("/http;//localhost:3000/api/login", otherParam)
         .then(res => {
             console.log("Login successful!");
             console.log(res);
