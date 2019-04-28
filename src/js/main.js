@@ -89,7 +89,7 @@ window.onload = () => {
 const allTasks = function () {
 axios({
     method:'get',
-    url:'http://localhost:3000/api/tasks',
+    url:`http://localhost:3000/api/tasks?token=${localStorage.Id_token}`,
     // responseType:'json',
   })
     .then(function(response) {
@@ -104,7 +104,7 @@ axios({
 
             const newTagSpan = document.createElement('span')
             document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].describe;
+            newTagSpan.innerHTML = response.data[i].name;
 
             const firstTagButton = document.createElement('button')
             document.querySelector(`#task${i}`).appendChild(firstTagButton);
@@ -135,7 +135,7 @@ async function setCategory (cat) {
   
 axios({
     method:'get',
-    url:`http://localhost:3000/api/tasks/category?category=${cat}`,
+    url:`http://localhost:3000/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
   })
     .then(function(response) {
         for (let i = 0; i<response.data.length;i++){
@@ -149,7 +149,7 @@ axios({
 
             const newTagSpan = document.createElement('span')
             document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].describe;
+            newTagSpan.innerHTML = response.data[i].name;
 
             const firstTagButton = document.createElement('button')
             document.querySelector(`#task${i}`).appendChild(firstTagButton);
