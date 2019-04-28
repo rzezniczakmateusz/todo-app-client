@@ -3,6 +3,7 @@ window.addEventListener('load', function () {
     if (registerButton) {
         registerButton.addEventListener('click', (e) => register(e));
     }
+
     const loginButton = document.getElementById('log_in_b');
 
     if (loginButton) {
@@ -10,7 +11,7 @@ window.addEventListener('load', function () {
     }
 })
 
-
+/*
 const checkButton = document.getElementsByClassName(`do`)[0];
 let checkButtonState = 'undone';
 
@@ -69,7 +70,7 @@ formButtonS.addEventListener('click', function (event) {
     form.style.display = 'none';
 
 });
-
+*/
 // **********************************pobieranie taskow******************
 window.onload = () => {
     if(document.querySelector('.mainSite')) {
@@ -214,13 +215,14 @@ function register() {
         method: "POST",
     };
 
-
     fetch("/api/http;//localhost:3000/api/register", otherParam)
         .then(res => {
             console.log("Registration successful!")
         }).catch(error => {
             console.log(error)
         })
+
+    document.location.href = 'index.html';
 }
 
 
@@ -248,5 +250,45 @@ function login() {
         }).catch(error => {
             console.log(error)
         })
-
+        document.location.href = 'main.html';
 }
+
+//login page
+window.onload = () => {
+    if(document.querySelector('#sing_up_b')){
+        const signUpButton = document.querySelector('#sing_up_b');
+
+        signUpButton.addEventListener('click', ()=>{
+            document.location.href = 'register.html';
+        })
+    };
+    if(document.querySelector('#log_in_b2')){
+        const loginButton = document.querySelector('#log_in_b2');
+
+        loginButton.addEventListener('click', ()=>{
+            document.location.href = 'index.html';
+        });
+    };
+
+//seeyousoon page
+    if(document.querySelector('#log_in_again_b')){
+        const seeYouButton = document.querySelector('#log_in_again_b');
+        //console.log(seeYouButton);
+
+        seeYouButton.addEventListener('click', () => {
+            document.location.href = 'index.html';
+        })
+    };
+
+//tasks page
+    if(document.querySelector('#log_out_b')){
+        const logoutButton = document.querySelector('#log_out_b');
+
+        function logout(){
+            localStorage.removeItem('Id_token') 
+            document.location.href = 'index.html'
+        }
+
+        logoutButton.addEventListener('click', logout);
+    };
+};
