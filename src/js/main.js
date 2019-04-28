@@ -27,18 +27,6 @@ function updateTaskStatus(id, status) {
 
 checkButton.addEventListener('click', imageChange);
 
-/*function deleteTask(id) {
-    fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-        method: "DELETE",
-    })
-        .then(resp => resp.json())
-        .then(resp => {
-            console.log(resp);
-        });
-}
-
-const checkButton = document.querySelector('.bin_b');
-checkButton.addEventListener('click', deleteTask);*/
 
 const button = document.querySelector('.add_b');
 const form = document.querySelector('.add_form');
@@ -70,8 +58,20 @@ formButtonS.addEventListener('click', function (event) {
 });
 
 // **********************************pobieranie taskow******************
+window.onload = () => {
+    if(document.querySelector('.mainSite')) {
+        allTasks();
 
-const allTasks = axios({
+        const tasksList = document.querySelector('.tasksList')
+        document.querySelector(`#work_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('work')})
+        document.querySelector(`#home_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('home')})
+        document.querySelector(`#personal_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('personal')})
+        document.querySelector(`#all_tasks_b`).addEventListener('click', () => {tasksList.innerHTML=''; allTasks()})
+    }
+}
+
+const allTasks = function () {
+axios({
     method:'get',
     url:'http://localhost:3000/api/tasks',
     // responseType:'json',
@@ -111,24 +111,15 @@ const allTasks = axios({
             })
         }
   });
-
-  // ******************** pobieranie po kategerii *******************
-
-const tasksList = document.querySelector('.tasksList')
-document.querySelector(`#work_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('work',1)})
-document.querySelector(`#home_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('home',2)})
-document.querySelector(`#personal_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('personal',3)})
-document.querySelector(`#all_tasks_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('',4)})
+}
 
 
-async function setCategory (cat,ID) {
+
+async function setCategory (cat) {
   
-await axios.delete(`http://localhost:3000/api/tasks/category${ID}`, { params: {category:cat} });
-// axios.get(`http://localhost:3000/api/tasks/category${ID}?category=${cat}`);
-
 axios({
     method:'get',
-    url:`http://localhost:3000/api/tasks/category${ID}`,
+    url:`http://localhost:3000/api/tasks/category?category=${cat}`,
   })
     .then(function(response) {
         for (let i = 0; i<response.data.length;i++){
@@ -171,3 +162,4 @@ function reply_click(clicked_id)
 {
   axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
+
