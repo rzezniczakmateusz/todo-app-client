@@ -65,19 +65,11 @@ aside {
     padding-left: 2vw;
 }
 
-<<<<<<< HEAD
-.three_buttons {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-    row-gap: 2vh;
-=======
 .task_buttons {
     display:flex;
     flex-direction: column;
     align-items: center;
     row-gap: 4vh;   
->>>>>>> master
 }
 
 #work_b{
@@ -178,7 +170,6 @@ section {
 
 section ul {
     list-style: none;
-<<<<<<< HEAD
 }
 
 section li {
@@ -194,23 +185,6 @@ section li {
     border-radius: 0.8rem;
 }
 
-=======
-}
-
-section li {
-    display: grid;
-    grid-template-columns: 1fr 60px 60px;
-    height: auto;
-    width: 50vw;
-    padding: 2vh;
-    margin: 2vh;
-    border: none;
-    color: white;
-    background: rgba(82, 255, 59, 0.8);
-    border-radius: 0.8rem;
-}
-
->>>>>>> master
 section li a {
     justify-self: center;
     align-self: center;
@@ -222,11 +196,7 @@ section button {
 }
 
 .add_form {
-<<<<<<< HEAD
-    display: flex;
-=======
     display: none;
->>>>>>> master
     flex-wrap: wrap;
     width: 40vw;
     height: 45vh;
@@ -236,10 +206,6 @@ section button {
     position: absolute;
     transform: translateX(40vw) translateY(30vh);
     justify-content: center;
-<<<<<<< HEAD
-    /* display: none; */
-=======
->>>>>>> master
 }
 
 .add_form p {
@@ -255,16 +221,6 @@ section button {
     margin-right: 5vw;
     border-radius: 0.8rem;
     border: solid 1px rgba(255, 59, 85, 0.9);
-<<<<<<< HEAD
-}
-
-.add_input {
-    width: 30vw;
-    height: 15vh; 
-    border-radius: 0.8rem;
-    border: solid 1px rgba(255, 59, 85, 0.9);
-    margin: 1vh;
-=======
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -277,7 +233,6 @@ section button {
     margin: 1vh;
     padding: 1vh;
     font-family: 'Montserrat', sans-serif;
->>>>>>> master
 }
 
 .form_button {
