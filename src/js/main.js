@@ -1,3 +1,16 @@
+window.addEventListener('load', function () {
+    const registerButton = document.getElementById('lets_notes_b');
+    if (registerButton) {
+        registerButton.addEventListener('click', (e) => register(e));
+    }
+    const loginButton = document.getElementById('log_in_b');
+
+    if (loginButton) {
+        loginButton.addEventListener('click', (e) => login(e));
+    }
+})
+
+
 const checkButton = document.getElementsByClassName(`do`)[0];
 let checkButtonState = 'undone';
 
@@ -14,11 +27,11 @@ function imageChange() {
 
 function updateTaskStatus(id, status) {
     fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-        method: "PUT",
-        body: {
-            done: status,
-        },
-    })
+            method: "PUT",
+            body: {
+                done: status,
+            },
+        })
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp);
@@ -34,11 +47,11 @@ const formButtonB = document.querySelector('.back');
 const formButtonS = document.querySelector('.save');
 
 button.addEventListener('click', function (event) {
-  
+
     event.preventDefault();
-        
+
     form.style.display = 'flex';
-    
+
 });
 
 formButtonB.addEventListener('click', function (event) {
@@ -163,3 +176,77 @@ function reply_click(clicked_id)
   axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
 
+function getUserInputData() {
+
+    const name = document.querySelector(".name").value;
+    const email = document.querySelector(".email").value;
+    const password = document.querySelector(".password").value;
+    const confirmPassword = document.querySelector('.confirmPassword').value;
+
+    return {
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
+    };
+
+}
+
+function register() {
+    const userInputData = getUserInputData();
+
+    if (userInputData.password !== userInputData.confirmPassword) {
+        console.log("Passwords don't match, please try again!")
+    }
+
+    const registrationBody = {
+        name: userInputData.name,
+        email: userInputData.email,
+        password: userInputData.password,
+
+    }
+
+    const otherParam = {
+        headers: {
+            "content-type": "application/json; charset=UTF-8"
+        },
+        body: registrationBody,
+        method: "POST",
+    };
+
+
+    fetch("/api/register", otherParam)
+        .then(res => {
+            console.log("Registration successful!")
+        }).catch(error => {
+            console.log(error)
+        })
+}
+
+
+function login() {
+    const userInputData = getUserInputData();
+
+    const loginBody = {
+        email: userInputData.email,
+        password: userInputData.password
+    }
+
+    const otherParam = {
+        headers: {
+            "content-type": "application/json; charset=UTF-8"
+        },
+        body: loginBody,
+        method: "POST",
+    }
+
+    fetch("/api/login", otherParam)
+        .then(res => {
+            console.log("Login successful!");
+            console.log(res);
+            localStorage.setItem("Id_token", res);
+        }).catch(error => {
+            console.log(error)
+        })
+
+}
