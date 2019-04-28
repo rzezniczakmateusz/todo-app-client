@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 window.addEventListener('load', function () {
     const registerButton = document.getElementById('lets_notes_b');
     if (registerButton) {
@@ -11,66 +13,71 @@ window.addEventListener('load', function () {
     }
 })
 
-/*
-const checkButton = document.getElementsByClassName(`do`)[0];
-let checkButtonState = 'undone';
 
-function imageChange() {
-    if (checkButtonState === 'undone') {
-        checkButton.src = '../public/img/done.png';
-        checkButtonState = 'done';
-    } else {
-        checkButton.src = '../public/img/do.png';
-        checkButtonState = 'undone'
+
+function addTodoStatusChangeListener() {
+    const checkButton = document.getElementById('done_button1');
+    let checkButtonState = 'undone';
+    let taskId = 1;
+  
+
+    function imageChange(id) {
+        if (checkButtonState === 'undone') {
+            checkButton.src = '../public/img/done.png';
+            checkButtonState = 'done';
+        } else {
+            checkButton.src = '../public/img/do.png';
+            checkButtonState = 'undone'
+        }
+        updateTaskStatus(id, checkButtonState === 'done');
+    };
+    
+    function updateTaskStatus(id, status) {
+        fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
+                method: "PUT",
+                body: {
+                    done: status,
+                },
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                console.log(resp);
+            });
+        }
+        checkButton.addEventListener('click', () => imageChange(taskId));
     }
-    updateTaskStatus(1, checkButtonState === 'done');
-};
-
-function updateTaskStatus(id, status) {
-    fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-            method: "PUT",
-            body: {
-                done: status,
-            },
-        })
-        .then(resp => resp.json())
-        .then(resp => {
-            console.log(resp);
-        });
-}
-
-checkButton.addEventListener('click', imageChange);
 
 
-const button = document.querySelector('.add_b');
-const form = document.querySelector('.add_form');
-const formButtonB = document.querySelector('.back');
-const formButtonS = document.querySelector('.save');
+// const button = document.querySelector('.add_b');
+// const form = document.querySelector('.add_form');
+// const formButtonB = document.querySelector('.back');
+// const formButtonS = document.querySelector('.save');
 
-button.addEventListener('click', function (event) {
+// button.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'flex';
+//     form.style.display = 'flex';
 
-});
+// });
 
-formButtonB.addEventListener('click', function (event) {
+// formButtonB.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'none';
+//     form.style.display = 'none';
 
-});
+// });
 
-formButtonS.addEventListener('click', function (event) {
+// formButtonS.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'none';
+//     form.style.display = 'none';
 
-});
-*/
+
+// });
+
 // **********************************pobieranie taskow******************
 window.onload = () => {
     if(document.querySelector('.mainSite')) {
@@ -87,7 +94,7 @@ window.onload = () => {
 const allTasks = function () {
 axios({
     method:'get',
-    url:'http://localhost:3000/api/tasks',
+    url:`http://localhost:3000/api/tasks?token=${localStorage.Id_token}`,
     // responseType:'json',
   })
     .then(function(response) {
@@ -102,7 +109,7 @@ axios({
 
             const newTagSpan = document.createElement('span')
             document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].describe;
+            newTagSpan.innerHTML = response.data[i].name;
 
             const firstTagButton = document.createElement('button')
             document.querySelector(`#task${i}`).appendChild(firstTagButton);
@@ -129,11 +136,11 @@ axios({
 
 
 
-async function setCategory (cat) {
+function setCategory (cat) {
   
 axios({
     method:'get',
-    url:`http://localhost:3000/api/tasks/category?category=${cat}`,
+    url:`http://localhost:3000/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
   })
     .then(function(response) {
         for (let i = 0; i<response.data.length;i++){
@@ -147,7 +154,7 @@ axios({
 
             const newTagSpan = document.createElement('span')
             document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].describe;
+            newTagSpan.innerHTML = response.data[i].name;
 
             const firstTagButton = document.createElement('button')
             document.querySelector(`#task${i}`).appendChild(firstTagButton);
@@ -177,7 +184,19 @@ function reply_click(clicked_id)
   axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
 
-function getUserInputData() {
+function getUserLoginInputData() {
+
+    const email = document.querySelector(".email").value;
+    const password = document.querySelector(".password").value;
+
+    return {
+        email: email,
+        password: password,
+    };
+
+}
+
+function getUserRegisterInputData() {
 
     const name = document.querySelector(".name").value;
     const email = document.querySelector(".email").value;
@@ -185,16 +204,17 @@ function getUserInputData() {
     const confirmPassword = document.querySelector('.confirmPassword').value;
 
     return {
-        name: name,
+       name: name,
         email: email,
         password: password,
-        confirmPassword: confirmPassword
+       confirmPassword: confirmPassword
     };
 
 }
 
-function register() {
-    const userInputData = getUserInputData();
+function register(e) {
+    e.preventDefault();
+    const userInputData = getUserRegisterInputData();
 
     if (userInputData.password !== userInputData.confirmPassword) {
         console.log("Passwords don't match, please try again!")
@@ -215,42 +235,60 @@ function register() {
         method: "POST",
     };
 
-    fetch("/api/http;//localhost:3000/api/register", otherParam)
-        .then(res => {
-            console.log("Registration successful!")
-        }).catch(error => {
-            console.log(error)
-        })
-
+    console.log(otherParam);
+    axios.post("http://localhost:3000/api/register", registrationBody)
+    .then(res => {
+        console.log("Registration successful!")
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    // fetch("http://localhost:3000/api/register", otherParam)
+    //     .then(res => {
+    //         console.log("Registration successful!")
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+  
     document.location.href = 'index.html';
 }
 
 
-function login() {
-    const userInputData = getUserInputData();
+function login(e) {
+    e.preventDefault();
+    const userInputData = getUserLoginInputData();
 
     const loginBody = {
         email: userInputData.email,
         password: userInputData.password
     }
 
-    const otherParam = {
-        headers: {
-            "content-type": "application/json; charset=UTF-8"
-        },
-        body: loginBody,
-        method: "POST",
-    }
-
-    fetch("/http;//localhost:3000/api/login", otherParam)
-        .then(res => {
-            console.log("Login successful!");
-            console.log(res);
-            localStorage.setItem("Id_token", res);
-        }).catch(error => {
-            console.log(error)
-        })
-        document.location.href = 'main.html';
+    // const otherParam = {
+    //     headers: {
+    //         "content-type": "application/json; charset=UTF-8"
+    //     },
+    //     body: loginBody,
+    //     method: "POST",
+    // }
+    axios.post("http://localhost:3000/api/login", loginBody)
+    .then(res => {
+        console.log("Login successful!");
+        console.log(res);
+        localStorage.setItem("Id_token", res.data);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    // fetch("http://localhost:3000/api/login", otherParam)
+    //     .then(res => {
+    //         console.log("Login successful!");
+    //         console.log(res);
+    //         localStorage.setItem("Id_token", res);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
+  
+    document.location.href = 'main.html';
 }
 
 //login page
