@@ -69,39 +69,76 @@ formButtonS.addEventListener('click', function (event) {
 
 });
 
-function register() {
+function getUserInputData() {
+
     const name = document.querySelector(".name").value;
     const email = document.querySelector(".email").value;
     const password = document.querySelector(".password").value;
     const confirmPassword = document.querySelector('.confirmPassword').value;
 
-    if (password !== confirmPassword) {
+    return {
+        name: name,
+        email: email,
+        password: password,
+        confirmPassword: confirmPassword
+    };
+
+}
+
+function register() {
+    const userInputData = getUserInputData();
+
+    if (userInputData.password !== userInputData.confirmPassword) {
         console.log("Passwords don't match, please try again!")
     }
 
-    const Param = {
-        name: name,
-        email: email,
-        password: password
-    };
+    const registrationBody = {
+        name: userInputData.name,
+        email: userInputData.email,
+        password: userInputData.password,
+
+    }
 
     const otherParam = {
         headers: {
             "content-type": "application/json; charset=UTF-8"
         },
-        body: Param,
+        body: registrationBody,
         method: "POST",
     };
 
 
     fetch("/api/register", otherParam)
-        .then(data => {
-            console.log(data)
-        })
         .then(res => {
-            console.log(res)
-         .catch(error => {
+            console.log("Registration successful!")
+        }).catch(error => {
             console.log(error)
-                })
-        });
+        })
+}
+
+function login() {
+    const userInputData = getUserInputData();
+
+    const loginBody = {
+        email: userInputData.email,
+        password: userInputData.password
+    }
+
+    const otherParam = {
+        headers: {
+            "content-type": "application/json; charset=UTF-8"
+        },
+        body: loginBody,
+        method: "POST",
+    }
+
+    fetch("/api/login", otherParam)
+        .then(res => {
+            console.log("Login successful!");
+            console.log(res);
+            localStorage.setItem("Id_token", res);
+        }).catch(error => {
+            console.log(error)
+        })
+
 }
