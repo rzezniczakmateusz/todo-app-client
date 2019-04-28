@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 window.addEventListener('load', function () {
     const registerButton = document.getElementById('lets_notes_b');
     if (registerButton) {
@@ -11,6 +13,7 @@ window.addEventListener('load', function () {
 })
 
 
+<<<<<<< Updated upstream
 function addTodoStatusChangeListener() {
     const checkButton = document.getElementById('done_button1');
     let checkButtonState = 'undone';
@@ -38,40 +41,56 @@ function addTodoStatusChangeListener() {
             .then(resp => {
                 console.log(resp);
             });
+=======
+// const checkButton = document.getElementsByClassName(`do`)[0];
+// let checkButtonState = 'undone';
+
+function imageChange() {
+    if (checkButtonState === 'undone') {
+        checkButton.src = '../public/img/done.png';
+        checkButtonState = 'done';
+    } else {
+        checkButton.src = '../public/img/do.png';
+        checkButtonState = 'undone'
+>>>>>>> Stashed changes
     }
 
+<<<<<<< Updated upstream
     checkButton.addEventListener('click', () => imageChange(taskId));
 }
+=======
+// checkButton.addEventListener('click', imageChange);
+>>>>>>> Stashed changes
 
 
-const button = document.querySelector('.add_b');
-const form = document.querySelector('.add_form');
-const formButtonB = document.querySelector('.back');
-const formButtonS = document.querySelector('.save');
+// const button = document.querySelector('.add_b');
+// const form = document.querySelector('.add_form');
+// const formButtonB = document.querySelector('.back');
+// const formButtonS = document.querySelector('.save');
 
-button.addEventListener('click', function (event) {
+// button.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'flex';
+//     form.style.display = 'flex';
 
-});
+// });
 
-formButtonB.addEventListener('click', function (event) {
+// formButtonB.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'none';
+//     form.style.display = 'none';
 
-});
+// });
 
-formButtonS.addEventListener('click', function (event) {
+// formButtonS.addEventListener('click', function (event) {
 
-    event.preventDefault();
+//     event.preventDefault();
 
-    form.style.display = 'none';
+//     form.style.display = 'none';
 
-});
+// });
 
 // **********************************pobieranie taskow******************
 window.onload = () => {
@@ -179,7 +198,19 @@ function reply_click(clicked_id)
   axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
 
-function getUserInputData() {
+function getUserLoginInputData() {
+
+    const email = document.querySelector(".email").value;
+    const password = document.querySelector(".password").value;
+
+    return {
+        email: email,
+        password: password,
+    };
+
+}
+
+function getUserRegisterInputData() {
 
     const name = document.querySelector(".name").value;
     const email = document.querySelector(".email").value;
@@ -187,16 +218,17 @@ function getUserInputData() {
     const confirmPassword = document.querySelector('.confirmPassword').value;
 
     return {
-        name: name,
+       name: name,
         email: email,
         password: password,
-        confirmPassword: confirmPassword
+       confirmPassword: confirmPassword
     };
 
 }
 
-function register() {
-    const userInputData = getUserInputData();
+function register(e) {
+    e.preventDefault();
+    const userInputData = getUserRegisterInputData();
 
     if (userInputData.password !== userInputData.confirmPassword) {
         console.log("Passwords don't match, please try again!")
@@ -216,40 +248,55 @@ function register() {
         body: registrationBody,
         method: "POST",
     };
-
-
-    fetch("/api/http;//localhost:3000/api/register", otherParam)
-        .then(res => {
-            console.log("Registration successful!")
-        }).catch(error => {
-            console.log(error)
-        })
+    console.log(otherParam);
+    axios.post("http://localhost:3000/api/register", registrationBody)
+    ,then(res => {
+        console.log("Registration successful!")
+    })
+    .catch(error => {
+        console.log(error)
+    })
+    // fetch("http://localhost:3000/api/register", otherParam)
+    //     .then(res => {
+    //         console.log("Registration successful!")
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
 }
 
 
-function login() {
-    const userInputData = getUserInputData();
+function login(e) {
+    e.preventDefault();
+    const userInputData = getUserLoginInputData();
 
     const loginBody = {
         email: userInputData.email,
         password: userInputData.password
     }
 
-    const otherParam = {
-        headers: {
-            "content-type": "application/json; charset=UTF-8"
-        },
-        body: loginBody,
-        method: "POST",
-    }
-
-    fetch("/http;//localhost:3000/api/login", otherParam)
-        .then(res => {
-            console.log("Login successful!");
-            console.log(res);
-            localStorage.setItem("Id_token", res);
-        }).catch(error => {
-            console.log(error)
-        })
+    // const otherParam = {
+    //     headers: {
+    //         "content-type": "application/json; charset=UTF-8"
+    //     },
+    //     body: loginBody,
+    //     method: "POST",
+    // }
+    axios.post("http://localhost:3000/api/login", loginBody)
+    .then(res => {
+        console.log("Login successful!");
+        console.log(res);
+        localStorage.setItem("Id_token", res.data);
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    // fetch("http://localhost:3000/api/login", otherParam)
+    //     .then(res => {
+    //         console.log("Login successful!");
+    //         console.log(res);
+    //         localStorage.setItem("Id_token", res);
+    //     }).catch(error => {
+    //         console.log(error)
+    //     })
 
 }
