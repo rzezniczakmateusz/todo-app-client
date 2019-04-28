@@ -1,3 +1,16 @@
+window.addEventListener('load', function () {
+    const registerButton = document.getElementById('lets_notes_b');
+    if (registerButton) {
+        registerButton.addEventListener('click', (e) => register(e));
+    }
+    const loginButton = document.getElementById('log_in_b');
+
+    if (loginButton) {
+        loginButton.addEventListener('click', (e) => login(e));
+    }
+})
+
+
 const checkButton = document.getElementsByClassName(`do`)[0];
 let checkButtonState = 'undone';
 
@@ -116,8 +129,6 @@ function register() {
         })
 }
 
-const registerButton = document.getElementById('lets_notes_b');
-registerButton.addEventListener('click', (e) => register(e));
 
 function login() {
     const userInputData = getUserInputData();
@@ -145,6 +156,3 @@ function login() {
         })
 
 }
-
-const loginButton = document.getElementById('log_in_b');
-loginButton.addEventListener('click', (e) => login(e));
