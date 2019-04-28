@@ -68,8 +68,7 @@ aside {
 .task_buttons {
     display:flex;
     flex-direction: column;
-    align-items: center;
-    row-gap: 4vh;   
+    align-items: center; 
 }
 
 #work_b{
@@ -81,7 +80,8 @@ aside {
     background: rgba(59, 167, 255, 0.9);
     border-radius: 0.8rem;
     border: none;
-    color:white;    
+    color:white;
+    margin: 2vh;    
 }
 
 #work_b:hover {
@@ -98,6 +98,7 @@ aside {
     border-radius: 0.8rem;
     border: none;
     color:white;    
+    margin: 2vh;
 }
 
 #home_b:hover {
@@ -114,6 +115,7 @@ aside {
     border-radius: 0.8rem;
     border: none;
     color:white;
+    margin: 2vh;
 }
 
 #personal_b:hover {
@@ -130,6 +132,7 @@ aside {
     border-radius: 0.8rem;
     border: none;
     color:white;
+    margin: 2vh;
 }
 
 #all_tasks_b:hover {
@@ -145,6 +148,7 @@ aside {
     border-radius: 50%;
     border: none;
     color:white;
+    margin: 2vh;
 }
 
 .add_b:hover {
