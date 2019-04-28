@@ -5,6 +5,7 @@ window.addEventListener('load', function () {
     if (registerButton) {
         registerButton.addEventListener('click', (e) => register(e));
     }
+
     const loginButton = document.getElementById('log_in_b');
 
     if (loginButton) {
@@ -13,10 +14,12 @@ window.addEventListener('load', function () {
 })
 
 
+
 function addTodoStatusChangeListener() {
     const checkButton = document.getElementById('done_button1');
     let checkButtonState = 'undone';
     let taskId = 1;
+  
 
     function imageChange(id) {
         if (checkButtonState === 'undone') {
@@ -71,6 +74,7 @@ function addTodoStatusChangeListener() {
 //     event.preventDefault();
 
 //     form.style.display = 'none';
+
 
 // });
 
@@ -230,6 +234,7 @@ function register(e) {
         body: registrationBody,
         method: "POST",
     };
+
     console.log(otherParam);
     axios.post("http://localhost:3000/api/register", registrationBody)
     .then(res => {
@@ -244,6 +249,8 @@ function register(e) {
     //     }).catch(error => {
     //         console.log(error)
     //     })
+  
+    document.location.href = 'index.html';
 }
 
 
@@ -280,5 +287,46 @@ function login(e) {
     //     }).catch(error => {
     //         console.log(error)
     //     })
-
+  
+    document.location.href = 'main.html';
 }
+
+//login page
+window.onload = () => {
+    if(document.querySelector('#sing_up_b')){
+        const signUpButton = document.querySelector('#sing_up_b');
+
+        signUpButton.addEventListener('click', ()=>{
+            document.location.href = 'register.html';
+        })
+    };
+    if(document.querySelector('#log_in_b2')){
+        const loginButton = document.querySelector('#log_in_b2');
+
+        loginButton.addEventListener('click', ()=>{
+            document.location.href = 'index.html';
+        });
+    };
+
+//seeyousoon page
+    if(document.querySelector('#log_in_again_b')){
+        const seeYouButton = document.querySelector('#log_in_again_b');
+        //console.log(seeYouButton);
+
+        seeYouButton.addEventListener('click', () => {
+            document.location.href = 'index.html';
+        })
+    };
+
+//tasks page
+    if(document.querySelector('#log_out_b')){
+        const logoutButton = document.querySelector('#log_out_b');
+
+        function logout(){
+            localStorage.removeItem('Id_token') 
+            document.location.href = 'index.html'
+        }
+
+        logoutButton.addEventListener('click', logout);
+    };
+};
