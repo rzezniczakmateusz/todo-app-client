@@ -11,41 +11,11 @@ window.addEventListener('load', function () {
     if (loginButton) {
         loginButton.addEventListener('click', (e) => login(e));
     }
-})
+});
 
 
 
-function addTodoStatusChangeListener() {
-    const checkButton = document.getElementById('done_button1');
-    let checkButtonState = 'undone';
-    let taskId = 1;
-  
 
-    function imageChange(id) {
-        if (checkButtonState === 'undone') {
-            checkButton.src = '../public/img/done.png';
-            checkButtonState = 'done';
-        } else {
-            checkButton.src = '../public/img/do.png';
-            checkButtonState = 'undone'
-        }
-        updateTaskStatus(id, checkButtonState === 'done');
-    };
-    
-    function updateTaskStatus(id, status) {
-        fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-                method: "PUT",
-                body: {
-                    done: status,
-                },
-            })
-            .then(resp => resp.json())
-            .then(resp => {
-                console.log(resp);
-            });
-        }
-        checkButton.addEventListener('click', () => imageChange(taskId));
-    }
 
 
 // const button = document.querySelector('.add_b');
@@ -80,15 +50,87 @@ function addTodoStatusChangeListener() {
 
 // **********************************pobieranie taskow******************
 window.onload = () => {
+    console.log('load');
     if(document.querySelector('.mainSite')) {
         allTasks();
-
+        console.log('onload');
         const tasksList = document.querySelector('.tasksList')
         document.querySelector(`#work_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('work')})
         document.querySelector(`#home_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('home')})
         document.querySelector(`#personal_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('personal')})
         document.querySelector(`#all_tasks_b`).addEventListener('click', () => {tasksList.innerHTML=''; allTasks()})
     }
+
+    //login page
+
+    if(document.querySelector('#sing_up_b')){
+        const signUpButton = document.querySelector('#sing_up_b');
+
+        signUpButton.addEventListener('click', ()=>{
+            document.location.href = 'register.html';
+        })
+    };
+    if(document.querySelector('#log_in_b2')){
+        const loginButton = document.querySelector('#log_in_b2');
+
+        loginButton.addEventListener('click', ()=>{
+            document.location.href = 'index.html';
+        });
+    };
+
+//seeyousoon page
+    if(document.querySelector('#log_in_again_b')){
+        const seeYouButton = document.querySelector('#log_in_again_b');
+        //console.log(seeYouButton);
+
+        seeYouButton.addEventListener('click', () => {
+            document.location.href = 'index.html';
+        })
+    };
+
+//tasks page
+    if(document.querySelector('#log_out_b')){
+        const logoutButton = document.querySelector('#log_out_b');
+
+        function logout(){
+            localStorage.removeItem('Id_token') 
+            document.location.href = 'logout.html'
+        }
+
+        logoutButton.addEventListener('click', logout);
+    };
+
+    function addTodoStatusChangeListener() {
+        const checkButton = document.getElementById('done_button1');
+        let checkButtonState = 'undone';
+        let taskId = 1;
+      
+    
+        function imageChange(id) {
+            if (checkButtonState === 'undone') {
+                checkButton.src = '../public/img/done.png';
+                checkButtonState = 'done';
+            } else {
+                checkButton.src = '../public/img/do.png';
+                checkButtonState = 'undone'
+            }
+            updateTaskStatus(id, checkButtonState === 'done');
+        };
+        
+        function updateTaskStatus(id, status) {
+            fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
+                    method: "PUT",
+                    body: {
+                        done: status,
+                    },
+                })
+                .then(resp => resp.json())
+                .then(resp => {
+                    console.log(resp);
+                });
+            }
+            checkButton.addEventListener('click', () => imageChange(taskId));
+        }
 }
 
 const allTasks = function () {
@@ -240,6 +282,9 @@ function register(e) {
     .then(res => {
         console.log("Registration successful!")
     })
+    .then(() => {
+        document.location.href = 'index.html';
+    })
     .catch(error => {
         console.log(error)
     })
@@ -250,7 +295,6 @@ function register(e) {
     //         console.log(error)
     //     })
   
-    document.location.href = 'index.html';
 }
 
 
@@ -276,6 +320,9 @@ function login(e) {
         console.log(res);
         localStorage.setItem("Id_token", res.data);
     })
+    .then(() => {
+        document.location.href = 'main.html';
+    })
     .catch(error => {
         console.log(error);
     })
@@ -288,45 +335,5 @@ function login(e) {
     //         console.log(error)
     //     })
   
-    document.location.href = 'main.html';
 }
 
-//login page
-window.onload = () => {
-    if(document.querySelector('#sing_up_b')){
-        const signUpButton = document.querySelector('#sing_up_b');
-
-        signUpButton.addEventListener('click', ()=>{
-            document.location.href = 'register.html';
-        })
-    };
-    if(document.querySelector('#log_in_b2')){
-        const loginButton = document.querySelector('#log_in_b2');
-
-        loginButton.addEventListener('click', ()=>{
-            document.location.href = 'index.html';
-        });
-    };
-
-//seeyousoon page
-    if(document.querySelector('#log_in_again_b')){
-        const seeYouButton = document.querySelector('#log_in_again_b');
-        //console.log(seeYouButton);
-
-        seeYouButton.addEventListener('click', () => {
-            document.location.href = 'index.html';
-        })
-    };
-
-//tasks page
-    if(document.querySelector('#log_out_b')){
-        const logoutButton = document.querySelector('#log_out_b');
-
-        function logout(){
-            localStorage.removeItem('Id_token') 
-            document.location.href = 'logout.html'
-        }
-
-        logoutButton.addEventListener('click', logout);
-    };
-};

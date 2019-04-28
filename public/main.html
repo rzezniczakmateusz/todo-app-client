@@ -9,7 +9,8 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
         <link rel="shortcut icon" href="./img/favicon.png" type="image/x=icon"/>
     </head>
-    <body onload="addTodoStatusChangeListener()">
+    <!-- <body onload="addTodoStatusChangeListener()"> -->
+        <body>
         <div id="container" class="mainSite">
                 <button id="log_out_b" onclick="">Log out</button>
             <aside>
@@ -21,7 +22,7 @@
                     <a>Let's make the ToDoList together!</a><br><br>
                 </div>
                 <div class="task_buttons">
-                    <button id="work_b" onclick="">Work</button>
+                    <button id="work_b">Work</button>
                     <button id="home_b" onclick="">Home</button>
                     <button id="personal_b" onclick="">Personal</button>
                     <button id="all_tasks_b" onclick="">All tasks</button>
@@ -35,7 +36,7 @@
                 <ul class='tasksList'>
                     <li>
                         <a><span> jajka, mleko, czekolada</span></a>
-                        <button><img class="do" id="done_button1" src="./img/do.png"></button>
+                        <button><img class="do" id="done_button" src="./img/do.png"></button>
                         <button class="bin_b"><img src="./img/bin.png"></button>
                     </li>
                 </ul>
