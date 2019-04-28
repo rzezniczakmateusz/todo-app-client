@@ -14,11 +14,11 @@ function imageChange() {
 
 function updateTaskStatus(id, status) {
     fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-        method: "PUT",
-        body: {
-            done: status,
-        },
-    })
+            method: "PUT",
+            body: {
+                done: status,
+            },
+        })
         .then(resp => resp.json())
         .then(resp => {
             console.log(resp);
@@ -46,11 +46,11 @@ const formButtonB = document.querySelector('.back');
 const formButtonS = document.querySelector('.save');
 
 button.addEventListener('click', function (event) {
-  
+
     event.preventDefault();
-        
+
     form.style.display = 'flex';
-    
+
 });
 
 formButtonB.addEventListener('click', function (event) {
@@ -68,3 +68,40 @@ formButtonS.addEventListener('click', function (event) {
     form.style.display = 'none';
 
 });
+
+function register() {
+    const name = document.querySelector(".name").value;
+    const email = document.querySelector(".email").value;
+    const password = document.querySelector(".password").value;
+    const confirmPassword = document.querySelector('.confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        console.log("Passwords don't match, please try again!")
+    }
+
+    const Param = {
+        name: name,
+        email: email,
+        password: password
+    };
+
+    const otherParam = {
+        headers: {
+            "content-type": "application/json; charset=UTF-8"
+        },
+        body: Param,
+        method: "POST",
+    };
+
+
+    fetch("/api/register", otherParam)
+        .then(data => {
+            console.log(data)
+        })
+        .then(res => {
+            console.log(res)
+         .catch(error => {
+            console.log(error)
+                })
+        });
+}
