@@ -18,35 +18,6 @@ window.addEventListener('load', function () {
 
 
 
-// const button = document.querySelector('.add_b');
-// const form = document.querySelector('.add_form');
-// const formButtonB = document.querySelector('.back');
-// const formButtonS = document.querySelector('.save');
-
-// button.addEventListener('click', function (event) {
-
-//     event.preventDefault();
-
-//     form.style.display = 'flex';
-
-// });
-
-// formButtonB.addEventListener('click', function (event) {
-
-//     event.preventDefault();
-
-//     form.style.display = 'none';
-
-// });
-
-// formButtonS.addEventListener('click', function (event) {
-
-//     event.preventDefault();
-
-//     form.style.display = 'none';
-
-
-// });
 
 // **********************************pobieranie taskow******************
 window.onload = () => {
@@ -131,6 +102,63 @@ window.onload = () => {
             }
             checkButton.addEventListener('click', () => imageChange(taskId));
         }
+
+//add tasks
+    
+    const button = document.querySelector('.add_b');
+    const form = document.querySelector('.add_form');
+    const formButtonB = document.querySelector('.back');
+    const formButtonS = document.querySelector('.save');
+    
+    if (button) {
+        button.addEventListener('click', function (event) {
+
+            event.preventDefault();
+
+            form.style.display = 'flex';
+
+        });
+    }
+    
+    if (formButtonB) {
+    formButtonB.addEventListener('click', function (event) {
+
+        event.preventDefault();
+
+        form.style.display = 'none';
+
+    });
+    }
+
+    if (formButtonS) {
+    formButtonS.addEventListener('click', function (event) {
+
+        event.preventDefault();
+
+        form.style.display = 'none';
+        
+        const add_select = document.querySelector(`.add_select`).value;
+        const add_input = document.querySelector(`.add_input`).value;
+
+        const task_data = {
+            name: add_input,
+            category: add_select,
+        }
+        axios.post(
+            'http://localhost:3000/api/tasks', task_data
+        )
+
+        .then(response => {
+            console.log(response);
+            document.querySelector(`.add_input`).value = '';
+        })
+
+        .then(response => {
+            document.querySelector('.tasksList').innerHTML = '';
+            allTasks();
+        })
+    });
+    }
 }
 
 const allTasks = function () {

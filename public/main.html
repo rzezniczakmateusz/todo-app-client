@@ -34,23 +34,19 @@
             </header>    
             <section>
                 <ul class='tasksList'>
-                    <li>
-                        <a><span> jajka, mleko, czekolada</span></a>
-                        <button><img class="do" id="done_button" src="./img/do.png"></button>
-                        <button class="bin_b"><img src="./img/bin.png"></button>
-                    </li>
+                    
                 </ul>
             </section>
             <div class="add_form">
                 <p>Edit task here:</p>
                 <select class="add_select">
-                    <option value="0">Work</option>
-                    <option value="1">Home</option>
-                    <option value="2">Office</option>
+                    <option value="work">Work</option>
+                    <option value="home">Home</option>
+                    <option value="personal">Personal</option>
                 </select>
                 <input type="text" class="add_input" placeholder="">
                 <button class="form_button back">Back</button>
-                <button class="form_button save" onclick="newTask()" >Save</button>
+                <button class="form_button save">Save</button>
             </div>
         </div>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
