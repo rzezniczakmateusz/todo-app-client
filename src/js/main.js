@@ -11,34 +11,37 @@ window.addEventListener('load', function () {
 })
 
 
-const checkButton = document.getElementsByClassName(`do`)[0];
-let checkButtonState = 'undone';
+function addTodoStatusChangeListener() {
+    const checkButton = document.getElementById('done_button1');
+    let checkButtonState = 'undone';
+    let taskId = 1;
 
-function imageChange() {
-    if (checkButtonState === 'undone') {
-        checkButton.src = '../public/img/done.png';
-        checkButtonState = 'done';
-    } else {
-        checkButton.src = '../public/img/do.png';
-        checkButtonState = 'undone'
+    function imageChange(id) {
+        if (checkButtonState === 'undone') {
+            checkButton.src = '../public/img/done.png';
+            checkButtonState = 'done';
+        } else {
+            checkButton.src = '../public/img/do.png';
+            checkButtonState = 'undone'
+        }
+        updateTaskStatus(id, checkButtonState === 'done');
+    };
+    
+    function updateTaskStatus(id, status) {
+        fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
+                method: "PUT",
+                body: {
+                    done: status,
+                },
+            })
+            .then(resp => resp.json())
+            .then(resp => {
+                console.log(resp);
+            });
     }
-    updateTaskStatus(1, checkButtonState === 'done');
-};
 
-function updateTaskStatus(id, status) {
-    fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-            method: "PUT",
-            body: {
-                done: status,
-            },
-        })
-        .then(resp => resp.json())
-        .then(resp => {
-            console.log(resp);
-        });
+    checkButton.addEventListener('click', () => imageChange(taskId));
 }
-
-checkButton.addEventListener('click', imageChange);
 
 
 const button = document.querySelector('.add_b');
