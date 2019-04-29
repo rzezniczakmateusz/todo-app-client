@@ -121,7 +121,7 @@ window.onload = () => {
                 category: add_select,
             }
             axios.post(
-                `http://localhost:3000/api/tasks/?token=${localStorage.Id_token}`, task_data
+                `https://obscure-cove-88913.herokuapp.com/api/tasks/?token=${localStorage.Id_token}`, task_data
             )
 
             .then(response => {
@@ -140,7 +140,7 @@ window.onload = () => {
 const allTasks = function() {
     axios({
             method: 'get',
-            url: `http://localhost:3000/api/tasks?token=${localStorage.Id_token}`,
+            url: `https://obscure-cove-88913.herokuapp.com/api/tasks?token=${localStorage.Id_token}`,
             // responseType:'json',
         })
         .then(function(response) {
@@ -195,7 +195,7 @@ function setCategory(cat) {
 
     axios({
             method: 'get',
-            url: `http://localhost:3000/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
+            url: `https://obscure-cove-88913.herokuapp.com/category?category=${cat}&token=${localStorage.Id_token}`,
         })
         .then(function(response) {
             for (let i = 0; i < response.data.length; i++) {
@@ -235,7 +235,7 @@ function setCategory(cat) {
 }
 
 function reply_click(clicked_id) {
-    axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
+    axios.delete('https://obscure-cove-88913.herokuapp.com/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
 
 function getUserLoginInputData() {
@@ -290,7 +290,7 @@ function register(e) {
     };
 
     console.log(otherParam);
-    axios.post("http://localhost:3000/api/register", registrationBody)
+    axios.post("https://obscure-cove-88913.herokuapp.com/api/register", registrationBody)
         .then(res => {
             console.log("Registration successful!")
         })
@@ -326,7 +326,7 @@ function login(e) {
     //     body: loginBody,
     //     method: "POST",
     // }
-    axios.post("http://localhost:3000/api/login", loginBody)
+    axios.post("https://obscure-cove-88913.herokuapp.com/api/login", loginBody)
         .then(res => {
             console.log("Login successful!");
             console.log(res);
@@ -351,7 +351,7 @@ function login(e) {
 
 
 function updateTaskStatus(id, status) {
-    const url = `http://localhost:3000/api/tasks/status/${id}/?token=${localStorage.Id_token}`;
+    const url = `https://obscure-cove-88913.herokuapp.com/api/tasks/status/${id}/?token=${localStorage.Id_token}`;
     const data = {
         status: status
     }
