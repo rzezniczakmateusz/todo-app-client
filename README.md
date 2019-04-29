@@ -1,1 +1,2 @@
-client
+
+permalink: /index.html
