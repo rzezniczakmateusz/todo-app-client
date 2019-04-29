@@ -4,9 +4,6 @@ body {
     margin: 0;
     padding: 0;
     background: center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
     background-size: cover;
     background-image: url("../../public/img/todo_bg.jpg");
 }
@@ -201,4 +198,36 @@ input {
     justify-self: center;
     align-self: center;   
     text-align: center;
+}
+
+ .authors {
+    position: absolute;
+    bottom: 10px;
+    width: 100vw;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    align-content: center;
+    margin-top: 15px;
+} 
+
+.media {
+    display: flex;
+    font-size: 4vh;
+    box-sizing: border-box;
+}
+
+.media a {
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    height: 4.2vh;
+    box-sizing: border-box;
+}
+
+.media a:hover{
+    background: rgba(0,0,0,0.8);
+    border: none;
 }

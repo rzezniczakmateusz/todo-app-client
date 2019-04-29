@@ -185,8 +185,19 @@ section li {
     margin: 2vh;
     border: none;
     color: white;
-    background: rgba(82, 255, 59, 0.8);
     border-radius: 0.8rem;
+}
+
+.tasksList .home {
+    background: rgba(82, 255, 59, 0.8);
+}
+
+.tasksList .personal {
+    background: rgba(255, 203, 59, 0.9);
+}
+
+.tasksList .work {
+    background: rgba(59, 167, 255, 0.9);
 }
 
 section li a {
@@ -250,4 +261,36 @@ section button {
     border-radius: 0.8rem;
     margin: 1vh;
     margin-bottom: 2vh;
+}
+
+ .authors {
+    position: absolute;
+    bottom: 10px;
+    width: 100vw;
+    display: flex;
+    font-size: 16px;
+    justify-content: center;
+    align-content: center;
+    margin-top: 15px;
+} 
+
+.media {
+    display: flex;
+    font-size: 4vh;
+    box-sizing: border-box;
+}
+
+.media a {
+    text-decoration: none;
+    color: white;
+    margin: 10px;
+    background: rgba(0,0,0,0.6);
+    border-radius: 6px;
+    height: 4.2vh;
+    box-sizing: border-box;
+}
+
+.media a:hover{
+    background: rgba(0,0,0,0.8);
+    border: none;
 }
