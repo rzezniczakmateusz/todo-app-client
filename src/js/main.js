@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-window.addEventListener('load', function () {
+window.addEventListener('load', function() {
     const registerButton = document.getElementById('lets_notes_b');
     if (registerButton) {
         registerButton.addEventListener('click', (e) => register(e));
@@ -22,35 +22,47 @@ window.addEventListener('load', function () {
 // **********************************pobieranie taskow******************
 window.onload = () => {
     console.log('load');
-    if(document.querySelector('.mainSite')) {
+    if (document.querySelector('.mainSite')) {
         allTasks();
         console.log('onload');
         const tasksList = document.querySelector('.tasksList')
-        document.querySelector(`#work_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('work')})
-        document.querySelector(`#home_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('home')})
-        document.querySelector(`#personal_b`).addEventListener('click', () => {tasksList.innerHTML=''; setCategory('personal')})
-        document.querySelector(`#all_tasks_b`).addEventListener('click', () => {tasksList.innerHTML=''; allTasks()})
+        document.querySelector(`#work_b`).addEventListener('click', () => {
+            tasksList.innerHTML = '';
+            setCategory('work')
+        })
+        document.querySelector(`#home_b`).addEventListener('click', () => {
+            tasksList.innerHTML = '';
+            setCategory('home')
+        })
+        document.querySelector(`#personal_b`).addEventListener('click', () => {
+            tasksList.innerHTML = '';
+            setCategory('personal')
+        })
+        document.querySelector(`#all_tasks_b`).addEventListener('click', () => {
+            tasksList.innerHTML = '';
+            allTasks()
+        })
     }
 
     //login page
 
-    if(document.querySelector('#sing_up_b')){
+    if (document.querySelector('#sing_up_b')) {
         const signUpButton = document.querySelector('#sing_up_b');
 
-        signUpButton.addEventListener('click', ()=>{
+        signUpButton.addEventListener('click', () => {
             document.location.href = 'register.html';
         })
     };
-    if(document.querySelector('#log_in_b2')){
+    if (document.querySelector('#log_in_b2')) {
         const loginButton = document.querySelector('#log_in_b2');
 
-        loginButton.addEventListener('click', ()=>{
+        loginButton.addEventListener('click', () => {
             document.location.href = 'index.html';
         });
     };
 
-//seeyousoon page
-    if(document.querySelector('#log_in_again_b')){
+    //seeyousoon page
+    if (document.querySelector('#log_in_again_b')) {
         const seeYouButton = document.querySelector('#log_in_again_b');
         //console.log(seeYouButton);
 
@@ -59,12 +71,12 @@ window.onload = () => {
         })
     };
 
-//tasks page
-    if(document.querySelector('#log_out_b')){
+    //tasks page
+    if (document.querySelector('#log_out_b')) {
         const logoutButton = document.querySelector('#log_out_b');
 
-        function logout(){
-            localStorage.removeItem('Id_token') 
+        function logout() {
+            localStorage.removeItem('Id_token')
             document.location.href = 'logout.html'
         }
 
@@ -75,8 +87,8 @@ window.onload = () => {
         const checkButton = document.getElementById('done_button1');
         let checkButtonState = 'undone';
         let taskId = 1;
-      
-    
+
+
         function imageChange(id) {
             if (checkButtonState === 'undone') {
                 checkButton.src = '../public/img/done.png';
@@ -87,7 +99,7 @@ window.onload = () => {
             }
             updateTaskStatus(id, checkButtonState === 'done');
         };
-        
+
         function updateTaskStatus(id, status) {
             fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
                     method: "PUT",
@@ -99,19 +111,19 @@ window.onload = () => {
                 .then(resp => {
                     console.log(resp);
                 });
-            }
-            checkButton.addEventListener('click', () => imageChange(taskId));
         }
+        checkButton.addEventListener('click', () => imageChange(taskId));
+    }
 
-//add tasks
-    
+    //add tasks
+
     const button = document.querySelector('.add_b');
     const form = document.querySelector('.add_form');
     const formButtonB = document.querySelector('.back');
     const formButtonS = document.querySelector('.save');
-    
+
     if (button) {
-        button.addEventListener('click', function (event) {
+        button.addEventListener('click', function(event) {
 
             event.preventDefault();
 
@@ -119,139 +131,138 @@ window.onload = () => {
 
         });
     }
-    
+
     if (formButtonB) {
-    formButtonB.addEventListener('click', function (event) {
+        formButtonB.addEventListener('click', function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        form.style.display = 'none';
+            form.style.display = 'none';
 
-    });
+        });
     }
 
     if (formButtonS) {
-    formButtonS.addEventListener('click', function (event) {
+        formButtonS.addEventListener('click', function(event) {
 
-        event.preventDefault();
+            event.preventDefault();
 
-        form.style.display = 'none';
-        
-        const add_select = document.querySelector(`.add_select`).value;
-        const add_input = document.querySelector(`.add_input`).value;
+            form.style.display = 'none';
 
-        const task_data = {
-            name: add_input,
-            category: add_select,
-        }
-        axios.post(
-            'http://localhost:3000/api/tasks', task_data
-        )
+            const add_select = document.querySelector(`.add_select`).value;
+            const add_input = document.querySelector(`.add_input`).value;
 
-        .then(response => {
-            console.log(response);
-            document.querySelector(`.add_input`).value = '';
-        })
+            const task_data = {
+                name: add_input,
+                category: add_select,
+            }
+            axios.post(
+                `http://localhost:3000/api/tasks/?token=${localStorage.Id_token}`, task_data
+            )
 
-        .then(response => {
-            document.querySelector('.tasksList').innerHTML = '';
-            allTasks();
-        })
-    });
+            .then(response => {
+                console.log(response);
+                document.querySelector(`.add_input`).value = '';
+            })
+
+            .then(response => {
+                document.querySelector('.tasksList').innerHTML = '';
+                allTasks();
+            })
+        });
     }
 }
 
-const allTasks = function () {
-axios({
-    method:'get',
-    url:`http://localhost:3000/api/tasks?token=${localStorage.Id_token}`,
-    // responseType:'json',
-  })
-    .then(function(response) {
-        for (let i = 0; i<response.data.length;i++){
-            const newParagraph = document.createElement('li');
-            newParagraph.setAttribute("id", `task${i}`);
-            newParagraph.setAttribute("class", `${response.data[i].category}`);
-            document.querySelector('.tasksList').appendChild(newParagraph);
+const allTasks = function() {
+    axios({
+            method: 'get',
+            url: `http://localhost:3000/api/tasks?token=${localStorage.Id_token}`,
+            // responseType:'json',
+        })
+        .then(function(response) {
+            for (let i = 0; i < response.data.length; i++) {
+                const newParagraph = document.createElement('li');
+                newParagraph.setAttribute("id", `task${i}`);
+                newParagraph.setAttribute("class", `${response.data[i].category}`);
+                document.querySelector('.tasksList').appendChild(newParagraph);
 
-            const newTagA = document.createElement('a')
-            document.querySelector(`#task${i}`).appendChild(newTagA);
+                const newTagA = document.createElement('a')
+                document.querySelector(`#task${i}`).appendChild(newTagA);
 
-            const newTagSpan = document.createElement('span')
-            document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].name;
+                const newTagSpan = document.createElement('span')
+                document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
+                newTagSpan.innerHTML = response.data[i].name;
 
-            const firstTagButton = document.createElement('button')
-            document.querySelector(`#task${i}`).appendChild(firstTagButton);
+                const firstTagButton = document.createElement('button')
+                document.querySelector(`#task${i}`).appendChild(firstTagButton);
 
-            const imgDo = document.createElement('img');
-            imgDo.setAttribute('class', `do`);
-            imgDo.setAttribute('src', "./img/do.png")
-            document.querySelector(`#task${i}`).querySelector('button').appendChild(imgDo);
+                const imgDo = document.createElement('img');
+                imgDo.setAttribute('class', `do`);
+                imgDo.setAttribute('src', "./img/do.png")
+                document.querySelector(`#task${i}`).querySelector('button').appendChild(imgDo);
 
-            const secondTagButton = document.createElement('button')
-            document.querySelector(`#task${i}`).appendChild(secondTagButton);
+                const secondTagButton = document.createElement('button')
+                document.querySelector(`#task${i}`).appendChild(secondTagButton);
 
-            const imgBin = document.createElement('img');
-            imgBin.setAttribute('class', `bin`);
-            imgBin.setAttribute('src', "./img/bin.png")
-            document.querySelector(`#task${i}`).lastElementChild.appendChild(imgBin);
-            document.querySelector(`#task${i}`).lastElementChild.querySelector('img').addEventListener('click', () => {
-                reply_click(`${response.data[i]._id}`);
-                document.querySelector(`#task${i}`).parentNode.removeChild(document.querySelector(`#task${i}`));
-            })
-        }
-  });
+                const imgBin = document.createElement('img');
+                imgBin.setAttribute('class', `bin`);
+                imgBin.setAttribute('src', "./img/bin.png")
+                document.querySelector(`#task${i}`).lastElementChild.appendChild(imgBin);
+                document.querySelector(`#task${i}`).lastElementChild.querySelector('img').addEventListener('click', () => {
+                    reply_click(`${response.data[i]._id}`);
+                    document.querySelector(`#task${i}`).parentNode.removeChild(document.querySelector(`#task${i}`));
+                })
+            }
+        });
 }
 
 
 
-function setCategory (cat) {
-  
-axios({
-    method:'get',
-    url:`http://localhost:3000/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
-  })
-    .then(function(response) {
-        for (let i = 0; i<response.data.length;i++){
-            const newParagraph = document.createElement('li');
-            newParagraph.setAttribute("id", `task${i}`);
-            newParagraph.setAttribute("class", `${response.data[i].category}`);
-            document.querySelector('.tasksList').appendChild(newParagraph);
+function setCategory(cat) {
 
-            const newTagA = document.createElement('a')
-            document.querySelector(`#task${i}`).appendChild(newTagA);
+    axios({
+            method: 'get',
+            url: `http://localhost:3000/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
+        })
+        .then(function(response) {
+            for (let i = 0; i < response.data.length; i++) {
+                const newParagraph = document.createElement('li');
+                newParagraph.setAttribute("id", `task${i}`);
+                newParagraph.setAttribute("class", `${response.data[i].category}`);
+                document.querySelector('.tasksList').appendChild(newParagraph);
 
-            const newTagSpan = document.createElement('span')
-            document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
-            newTagSpan.innerHTML = response.data[i].name;
+                const newTagA = document.createElement('a')
+                document.querySelector(`#task${i}`).appendChild(newTagA);
 
-            const firstTagButton = document.createElement('button')
-            document.querySelector(`#task${i}`).appendChild(firstTagButton);
+                const newTagSpan = document.createElement('span')
+                document.querySelector(`#task${i}`).firstElementChild.appendChild(newTagSpan);
+                newTagSpan.innerHTML = response.data[i].name;
 
-            const imgDo = document.createElement('img');
-            imgDo.setAttribute('class', `do`);
-            imgDo.setAttribute('src', "./img/do.png")
-            document.querySelector(`#task${i}`).querySelector('button').appendChild(imgDo);
+                const firstTagButton = document.createElement('button')
+                document.querySelector(`#task${i}`).appendChild(firstTagButton);
 
-            const secondTagButton = document.createElement('button')
-            document.querySelector(`#task${i}`).appendChild(secondTagButton);
+                const imgDo = document.createElement('img');
+                imgDo.setAttribute('class', `do`);
+                imgDo.setAttribute('src', "./img/do.png")
+                document.querySelector(`#task${i}`).querySelector('button').appendChild(imgDo);
 
-            const imgBin = document.createElement('img');
-            imgBin.setAttribute('class', `bin`);
-            imgBin.setAttribute('src', "./img/bin.png")
-            document.querySelector(`#task${i}`).lastElementChild.appendChild(imgBin);
-            document.querySelector(`#task${i}`).lastElementChild.querySelector('img').addEventListener('click', () => {
-                reply_click(`${response.data[i]._id}`);
-                document.querySelector(`#task${i}`).parentNode.removeChild(document.querySelector(`#task${i}`));
-            })
-        }
-  });
+                const secondTagButton = document.createElement('button')
+                document.querySelector(`#task${i}`).appendChild(secondTagButton);
+
+                const imgBin = document.createElement('img');
+                imgBin.setAttribute('class', `bin`);
+                imgBin.setAttribute('src', "./img/bin.png")
+                document.querySelector(`#task${i}`).lastElementChild.appendChild(imgBin);
+                document.querySelector(`#task${i}`).lastElementChild.querySelector('img').addEventListener('click', () => {
+                    reply_click(`${response.data[i]._id}`);
+                    document.querySelector(`#task${i}`).parentNode.removeChild(document.querySelector(`#task${i}`));
+                })
+            }
+        });
 }
 
-function reply_click(clicked_id)
-{
-  axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
+function reply_click(clicked_id) {
+    axios.delete('http://localhost:3000/api/tasks/', { params: { _id: `${clicked_id}` } });
 }
 
 function getUserLoginInputData() {
@@ -274,10 +285,10 @@ function getUserRegisterInputData() {
     const confirmPassword = document.querySelector('.confirmPassword').value;
 
     return {
-       name: name,
+        name: name,
         email: email,
         password: password,
-       confirmPassword: confirmPassword
+        confirmPassword: confirmPassword
     };
 
 }
@@ -307,22 +318,22 @@ function register(e) {
 
     console.log(otherParam);
     axios.post("http://localhost:3000/api/register", registrationBody)
-    .then(res => {
-        console.log("Registration successful!")
-    })
-    .then(() => {
-        document.location.href = 'index.html';
-    })
-    .catch(error => {
-        console.log(error)
-    })
-    // fetch("http://localhost:3000/api/register", otherParam)
-    //     .then(res => {
-    //         console.log("Registration successful!")
-    //     }).catch(error => {
-    //         console.log(error)
-    //     })
-  
+        .then(res => {
+            console.log("Registration successful!")
+        })
+        .then(() => {
+            document.location.href = 'index.html';
+        })
+        .catch(error => {
+            console.log(error)
+        })
+        // fetch("http://localhost:3000/api/register", otherParam)
+        //     .then(res => {
+        //         console.log("Registration successful!")
+        //     }).catch(error => {
+        //         console.log(error)
+        //     })
+
 }
 
 
@@ -343,25 +354,24 @@ function login(e) {
     //     method: "POST",
     // }
     axios.post("http://localhost:3000/api/login", loginBody)
-    .then(res => {
-        console.log("Login successful!");
-        console.log(res);
-        localStorage.setItem("Id_token", res.data);
-    })
-    .then(() => {
-        document.location.href = 'main.html';
-    })
-    .catch(error => {
-        console.log(error);
-    })
-    // fetch("http://localhost:3000/api/login", otherParam)
-    //     .then(res => {
-    //         console.log("Login successful!");
-    //         console.log(res);
-    //         localStorage.setItem("Id_token", res);
-    //     }).catch(error => {
-    //         console.log(error)
-    //     })
-  
-}
+        .then(res => {
+            console.log("Login successful!");
+            console.log(res);
+            localStorage.setItem("Id_token", res.data);
+        })
+        .then(() => {
+            document.location.href = 'main.html';
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        // fetch("http://localhost:3000/api/login", otherParam)
+        //     .then(res => {
+        //         console.log("Login successful!");
+        //         console.log(res);
+        //         localStorage.setItem("Id_token", res);
+        //     }).catch(error => {
+        //         console.log(error)
+        //     })
 
+}
