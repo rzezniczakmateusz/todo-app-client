@@ -14,11 +14,6 @@ window.addEventListener('load', function() {
 });
 
 
-
-
-
-
-
 // **********************************pobieranie taskow******************
 window.onload = () => {
     console.log('load');
@@ -83,37 +78,6 @@ window.onload = () => {
         logoutButton.addEventListener('click', logout);
     };
 
-    function addTodoStatusChangeListener() {
-        const checkButton = document.getElementById('done_button1');
-        let checkButtonState = 'undone';
-        let taskId = 1;
-
-
-        function imageChange(id) {
-            if (checkButtonState === 'undone') {
-                checkButton.src = '../public/img/done.png';
-                checkButtonState = 'done';
-            } else {
-                checkButton.src = '../public/img/do.png';
-                checkButtonState = 'undone'
-            }
-            updateTaskStatus(id, checkButtonState === 'done');
-        };
-
-        function updateTaskStatus(id, status) {
-            fetch(`http://localhost:3000/api/tasks/status/${id}/`, {
-                    method: "PUT",
-                    body: {
-                        done: status,
-                    },
-                })
-                .then(resp => resp.json())
-                .then(resp => {
-                    console.log(resp);
-                });
-        }
-        checkButton.addEventListener('click', () => imageChange(taskId));
-    }
 
     //add tasks
 
@@ -196,9 +160,18 @@ const allTasks = function() {
                 const firstTagButton = document.createElement('button')
                 document.querySelector(`#task${i}`).appendChild(firstTagButton);
 
+                const id = response.data[i]._id;
+                const status = response.data[i].status;
                 const imgDo = document.createElement('img');
-                imgDo.setAttribute('class', `do`);
-                imgDo.setAttribute('src', "./img/do.png")
+                if (status === false) {
+                    imgDo.setAttribute('class', `do`);
+                    imgDo.setAttribute('src', "./img/do.png");
+                    imgDo.addEventListener('click', () => updateTaskStatus(id, true));
+                } else {
+                    imgDo.setAttribute('class', `done`);
+                    imgDo.setAttribute('src', "./img/done.png");
+                    imgDo.addEventListener('click', () => updateTaskStatus(id, false));
+                }
                 document.querySelector(`#task${i}`).querySelector('button').appendChild(imgDo);
 
                 const secondTagButton = document.createElement('button')
@@ -374,4 +347,21 @@ function login(e) {
         //         console.log(error)
         //     })
 
+}
+
+
+function updateTaskStatus(id, status) {
+    const url = `http://localhost:3000/api/tasks/status/${id}/?token=${localStorage.Id_token}`;
+    const data = {
+        status: status
+    }
+    axios.put(url, data)
+        .then(resp => {
+            const tasksList = document.querySelector('.tasksList');
+            tasksList.innerHTML = '';
+            allTasks();
+        })
+        .catch(err => {
+            console.log(err);
+        });
 }
