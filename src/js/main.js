@@ -45,14 +45,14 @@ window.onload = () => {
         const signUpButton = document.querySelector('#sing_up_b');
 
         signUpButton.addEventListener('click', () => {
-            document.location.href = 'register.html';
+            document.location.href = './public/register.html';
         })
     };
     if (document.querySelector('#log_in_b2')) {
         const loginButton = document.querySelector('#log_in_b2');
 
         loginButton.addEventListener('click', () => {
-            document.location.href = 'index.html';
+            document.location.href = '../index.html';
         });
     };
 
@@ -62,7 +62,7 @@ window.onload = () => {
         //console.log(seeYouButton);
 
         seeYouButton.addEventListener('click', () => {
-            document.location.href = 'index.html';
+            document.location.href = '../index.html';
         })
     };
 
@@ -72,7 +72,7 @@ window.onload = () => {
 
         function logout() {
             localStorage.removeItem('Id_token')
-            document.location.href = 'logout.html'
+            document.location.href = './public/logout.html'
         }
 
         logoutButton.addEventListener('click', logout);
@@ -295,7 +295,7 @@ function register(e) {
             console.log("Registration successful!")
         })
         .then(() => {
-            document.location.href = 'index.html';
+            document.location.href = '../index.html';
         })
         .catch(error => {
             console.log(error)
@@ -333,7 +333,7 @@ function login(e) {
             localStorage.setItem("Id_token", res.data);
         })
         .then(() => {
-            document.location.href = 'main.html';
+            document.location.href = './public/main.html';
         })
         .catch(error => {
             console.log(error);
