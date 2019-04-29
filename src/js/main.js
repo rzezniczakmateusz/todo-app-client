@@ -195,7 +195,7 @@ function setCategory(cat) {
 
     axios({
             method: 'get',
-            url: `https://obscure-cove-88913.herokuapp.com/category?category=${cat}&token=${localStorage.Id_token}`,
+            url: `https://obscure-cove-88913.herokuapp.com/api/tasks/category?category=${cat}&token=${localStorage.Id_token}`,
         })
         .then(function(response) {
             for (let i = 0; i < response.data.length; i++) {
