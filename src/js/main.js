@@ -72,7 +72,7 @@ window.onload = () => {
 
         function logout() {
             localStorage.removeItem('Id_token')
-            document.location.href = './public/logout.html'
+            document.location.href = './logout.html'
         }
 
         logoutButton.addEventListener('click', logout);
